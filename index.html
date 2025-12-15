@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>余興用ダンス動画 パート別サイト</title>
+<style>
+
+body {
+  font-family: sans-serif;
+  background: #111;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+padding: 20px;
+text-align: center;
+background: #222;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3列固定 */
+  gap: 20px;
+  padding: 20px;
+}
+
+/* タブレット */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* スマホ */
+@media (max-width: 600px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+background: #1e1e1e;
+border-radius: 12px;
+padding: 15px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+transition: transform 0.25s ease, box-shadow 0.25s ease;
+position: relative; /* 重要 */
+}
+
+
+/* 再生中カード */
+.card.active {
+position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.2);
+  width: min(90vw, 500px);
+box-shadow: 0 0 25px rgba(0, 255, 60, 0.8);
+z-index: 100; /* 最前面 */
+}
+
+
+/* スマホではさらに強調 */
+@media (max-width: 600px) {
+.card.active {
+transform: scale(1.1);
+}
+}
+
+.card h2 {
+font-size: 18px;
+margin-bottom: 10px;
+}
+
+video {
+width: 100%;
+border-radius: 8px;
+}
+
+.speed-buttons {
+display: flex;
+gap: 6px;
+margin-top: 6px;
+}
+
+.speed-buttons button {
+margin-top: 10px;
+width: 100%;
+padding: 8px;
+border: none;
+border-radius: 6px;
+background: #ff4081; /* 再生ボタン用の赤 */
+color: #fff;
+font-size: 14px;
+cursor: pointer;
+}
+
+/* 再生ボタン専用 */
+.play-button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #ff4081;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* 速度ボタン用 */
+.speed-buttons {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.speed-buttons button {
+  flex: 1;
+  padding: 6px;
+  font-size: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #444;
+  color: #fff;
+  cursor: pointer;
+}
+
+.speed-buttons button.active {
+  background: #4caf50;
+}
+
+button:hover {
+opacity: 0.9;
+}
+
+.fullscreen-button {
+  margin-top: 6px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  background: #2196f3; /* 青 */
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+
+
+<header>
+<h1>余興用ダンス動画（パート別）</h1>
+<h2>見たいパートを選んで再生できます</h2>
+<p>
+    動画の著作権ガン無視なので、秘密でお願いします<br>
+    また、スマホでの表示テストを行っていないため、<br>
+    スマホで閲覧した際に不具合があれば西川にlineしてください、<br>
+    時間を見つけて直しますので。
+</p>
+</header>
+
+
+<div class="container">
+<div class="card">
+<h2>1. イントロ</h2>
+<video id="video1" src="カリスマックス/カリスマックスイントロ.mp4"></video>
+<button class="play-button" onclick="playVideo('video1', this)">再生</button>
+<button class="fullscreen-button" onclick="toggleFullscreen('video1')">
+  全画面
+</button>
+<div class="speed-buttons">
+<button onclick="setSpeed('video1', 0.5, this)">0.5×</button>
+<button onclick="setSpeed('video1', 0.75, this)">0.75×</button>
+<button onclick="setSpeed('video1', 1.0, this)" class="active">1×</button>
+</div>
+</div>
+
+<div class="card">
+<h2>2. A-Bメロ</h2>
+<video id="video2" src="カリスマックス/カリスマックスA-B.mp4"></video>
+<button class="play-button" onclick="playVideo('video2', this)">再生</button>
+<button class="fullscreen-button" onclick="toggleFullscreen('video2')">
+  全画面
+</button>
+<div class="speed-buttons">
+<button onclick="setSpeed('video2', 0.5, this)">0.5×</button>
+<button onclick="setSpeed('video2', 0.75, this)">0.75×</button>
+<button onclick="setSpeed('video2', 1.0, this)" class="active">1×</button>
+</div>
+</div>
+
+<div class="card">
+<h2>3. サビ</h2>
+<video id="video3" src="カリスマックス/カリスマックスサビ.mp4"></video>
+<button class="play-button" onclick="playVideo('video3', this)">再生</button>
+<button class="fullscreen-button" onclick="toggleFullscreen('video3')">
+  全画面
+</button>
+<div class="speed-buttons">
+<button onclick="setSpeed('video3', 0.5, this)">0.5×</button>
+<button onclick="setSpeed('video3', 0.75, this)">0.75×</button>
+<button onclick="setSpeed('video3', 1.0, this)" class="active">1×</button>
+</div>
+</div>
+
+<div class="card">
+<h2>4. A2-B2</h2>
+<video id="video4" src="カリスマックス/カリスマックスA2-B2.mp4"></video>
+<button class="play-button" onclick="playVideo('video4', this)">再生</button>
+<button class="fullscreen-button" onclick="toggleFullscreen('video4')">
+  全画面
+</button>
+<div class="speed-buttons">
+<button onclick="setSpeed('video4', 0.5, this)">0.5×</button>
+<button onclick="setSpeed('video4', 0.75, this)">0.75×</button>
+<button onclick="setSpeed('video4', 1.0, this)" class="active">1×</button>
+</div>
+</div>
+
+<div class="card">
+<h2>5. サビ2</h2>
+<video id="video5" src="カリスマックス/カリスマックスサビ2.mp4"></video>
+<button class="play-button" onclick="playVideo('video5', this)">再生</button>
+<button class="fullscreen-button" onclick="toggleFullscreen('video5')">
+  全画面
+</button>
+<div class="speed-buttons">
+<button onclick="setSpeed('video5', 0.5, this)">0.5×</button>
+<button onclick="setSpeed('video5', 0.75, this)">0.75×</button>
+<button onclick="setSpeed('video5', 1.0, this)" class="active">1×</button>
+</div>
+</div>
+
+<div class="card">
+<h2>6. 間奏</h2>
+<video id="video6" src="カリスマックス/カリスマックス間奏.mp4"></video>
+<button class="play-button" onclick="playVideo('video6', this)">再生</button>
+<button class="fullscreen-button" onclick="toggleFullscreen('video6')">
+  全画面
+</button>
+<div class="speed-buttons">
+<button onclick="setSpeed('video6', 0.5, this)">0.5×</button>
+<button onclick="setSpeed('video6', 0.75, this)">0.75×</button>
+<button onclick="setSpeed('video6', 1.0, this)" class="active">1×</button>
+</div>
+</div>
+
+<div class="card">
+<h2>7. サビ3</h2>
+<video id="video7" src="カリスマックス/カリスマックスサビ3.mp4"></video>
+<button class="play-button" onclick="playVideo('video7', this)">再生</button>
+<button class="fullscreen-button" onclick="toggleFullscreen('video7')">
+  全画面
+</button>
+<div class="speed-buttons">
+<button onclick="setSpeed('video7', 0.5, this)">0.5×</button>
+<button onclick="setSpeed('video7', 0.75, this)">0.75×</button>
+<button onclick="setSpeed('video7', 1.0, this)" class="active">1×</button>
+</div>
+</div>
+
+<div class="card">
+<h2>8. ラスサビ</h2>
+<video id="video8" src="カリスマックス/カリスマックスラスサビ.mp4"></video>
+<button class="play-button" onclick="playVideo('video8', this)">再生</button>
+<button class="fullscreen-button" onclick="toggleFullscreen('video8')">
+  全画面
+</button>
+<div class="speed-buttons">
+<button onclick="setSpeed('video8', 0.5, this)">0.5×</button>
+<button onclick="setSpeed('video8', 0.75, this)">0.75×</button>
+<button onclick="setSpeed('video8', 1.0, this)" class="active">1×</button>
+</div>
+</div>
+
+<div class="card">
+<h2>9. 全体</h2>
+<video id="video9" src="カリスマックス/カリスマックス.mp4"></video>
+<button class="play-button" onclick="playVideo('video9', this)">再生</button>
+<button class="fullscreen-button" onclick="toggleFullscreen('video9')">
+  全画面
+</button>
+<div class="speed-buttons">
+<button onclick="setSpeed('video9', 0.5, this)">0.5×</button>
+<button onclick="setSpeed('video9', 0.75, this)">0.75×</button>
+<button onclick="setSpeed('video9', 1.0, this)" class="active">1×</button>
+</div>
+</div>
+
+</div>
+
+
+<script>
+function playVideo(id, button) {
+  const video = document.getElementById(id);
+  const card = video.closest('.card');
+
+  // 他の動画を停止
+  document.querySelectorAll('video').forEach(v => {
+    if (v !== video) {
+      v.pause();
+      v.currentTime = 0;
+      v.loop = false;
+      v.playbackRate = 1.0;
+    }
+  });
+
+  // 他のカードを解除
+  document.querySelectorAll('.card').forEach(c => {
+    if (c !== card) c.classList.remove('active');
+  });
+
+  // 他の再生ボタンを戻す
+  document.querySelectorAll('.play-button').forEach(b => {
+    if (b !== button) b.textContent = '再生';
+  });
+
+  if (!video.paused) {
+    video.pause();
+    video.currentTime = 0;
+    video.loop = false;
+    button.textContent = '再生';
+    card.classList.remove('active');
+  } else {
+    video.loop = true;
+    video.play();
+    button.textContent = '停止';
+    card.classList.add('active');
+  }
+}
+
+/* ★ これを追加 ★ */
+function setSpeed(videoId, speed, button) {
+  const video = document.getElementById(videoId);
+
+  // 再生速度を変更
+  video.playbackRate = speed;
+
+  // 同じカード内の速度ボタンの active を解除
+  const buttons = button.parentElement.querySelectorAll('button');
+  buttons.forEach(b => b.classList.remove('active'));
+
+  // 押されたボタンを active に
+  button.classList.add('active');
+}
+
+function toggleFullscreen(videoId) {
+  const video = document.getElementById(videoId);
+
+  if (!document.fullscreenElement) {
+    // フルスクリーン開始
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) {
+      video.webkitRequestFullscreen(); // Safari
+    } else if (video.msRequestFullscreen) {
+      video.msRequestFullscreen(); // IE
+    }
+  } else {
+    // フルスクリーン解除
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  }
+}
+
+</script>
+
+</body>
+</html>
