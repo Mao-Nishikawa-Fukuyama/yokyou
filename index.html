@@ -65,7 +65,11 @@ position: relative; /* 重要 */
 
 /* 再生中カード */
 .card.active {
-  transform: scale(1.15);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.15);
+  width: min(90vw, 500px);
   box-shadow: 0 0 25px rgba(0, 255, 60, 0.8);
   z-index: 100; /* 最前面 */
 }
