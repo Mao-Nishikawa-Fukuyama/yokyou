@@ -375,17 +375,22 @@ function setSpeed(videoId, speed, button) {
 function toggleFullscreen(videoId) {
   const video = document.getElementById(videoId);
 
-  // iPhone / iPad（Safari）
+  // iPhone Safari
   if (video.webkitEnterFullscreen) {
     video.webkitEnterFullscreen();
     return;
   }
 
-  // Android / PC
-  if (!document.fullscreenElement) {
-    video.requestFullscreen();
+  // Android Chrome / PC
+  // 再生されていない場合は再生してから全画面
+  if (video.paused) {
+    video.play().then(() => {
+      video.requestFullscreen();
+    }).catch(() => {
+      // autoplay制限対策（念のため）
+    });
   } else {
-    document.exitFullscreen();
+    video.requestFullscreen();
   }
 }
 
