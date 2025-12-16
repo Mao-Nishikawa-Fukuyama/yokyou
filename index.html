@@ -375,24 +375,17 @@ function setSpeed(videoId, speed, button) {
 function toggleFullscreen(videoId) {
   const video = document.getElementById(videoId);
 
+  // iPhone / iPad（Safari）
+  if (video.webkitEnterFullscreen) {
+    video.webkitEnterFullscreen();
+    return;
+  }
+
+  // Android / PC
   if (!document.fullscreenElement) {
-    // フルスクリーン開始
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (video.webkitRequestFullscreen) {
-      video.webkitRequestFullscreen(); // Safari
-    } else if (video.msRequestFullscreen) {
-      video.msRequestFullscreen(); // IE
-    }
+    video.requestFullscreen();
   } else {
-    // フルスクリーン解除
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
-    }
+    document.exitFullscreen();
   }
 }
 
